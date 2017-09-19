@@ -203,7 +203,7 @@ int main(int argc, char* argv[]) {
   float probe_fea[2048] = {0.0};
   face_recognizer.ExtractFeatureWithCrop(probe_img_data_color, probe_points, probe_fea);
 
-  //add for normalize the inputData:
+  //add for normalize the inputData:，重要，因为flann使用的是欧氏距离，而seetaFace使用的是余弦距离，将特征向量进行正则化，则欧氏距离为：1-2*余弦距离。
   float norm = 0.0;
   for(int i = 0; i<IMAGE_FEATURE_NUM; i++) {
     norm += probe_fea[i] * probe_fea[i];
